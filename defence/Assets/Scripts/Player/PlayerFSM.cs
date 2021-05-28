@@ -7,7 +7,7 @@ public class PlayerFSM : FSMBase
     public Vector2 LastInputVector {  get { return lastInputVector; } }
 
     DirectionMovement movementComponent;
-    FlipSpriteToPoint spriteFlipComponent;
+    FlipObjectToPoint spriteFlipComponent;
     [SerializeField]
     PlayerHand hand;
     Vector2 inputVector;
@@ -21,7 +21,7 @@ public class PlayerFSM : FSMBase
         movementComponent = GetComponent<DirectionMovement>();
         movementComponent.direction = inputVector;
         inputVector = Vector2.zero;
-        spriteFlipComponent = GetComponent<FlipSpriteToPoint>();
+        spriteFlipComponent = GetComponent<FlipObjectToPoint>();
         lastInputVector = new Vector2(1, 0);
 
 

@@ -12,6 +12,8 @@ public class MovementController : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         movementList.AddRange(GetComponents<MovementBase>());
+        if (movementList.Count == 0)
+            this.enabled = false;
         //knockback = GetComponent<Knockback>();
     }
     void FixedUpdate()

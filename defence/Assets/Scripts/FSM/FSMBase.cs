@@ -6,7 +6,7 @@ public abstract class FSMBase : MonoBehaviour
 {
     public enum State
     {
-        Idle=0, Walk=1
+        Idle=0, Walk=1, Attack=2
     }
     protected State currentState;
     protected bool isNewState;
@@ -46,19 +46,23 @@ public abstract class FSMBase : MonoBehaviour
     {
         currentState = state;
         isNewState = true;
-        animator.SetInteger("State", (int)currentState);
+        if(animator != null)
+            animator.SetInteger("State", (int)currentState);
     }
     public void SetIntParam(string paramName, int i)
     {
-        animator.SetInteger(paramName, i);
+        if (animator != null)
+            animator.SetInteger(paramName, i);
     }
     public void SetBoolParam(string paramName, bool b)
     {
-        animator.SetBool(paramName, b);
+        if (animator != null)
+            animator.SetBool(paramName, b);
     }
     protected void SetAnimTrigger(string triggerName)
     {
-        animator.SetTrigger(triggerName);
+        if (animator != null)
+            animator.SetTrigger(triggerName);
     }
 
     protected void DisableComponent(MonoBehaviour component)

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,13 +13,13 @@ public class FlipSpriteToPoint : MonoBehaviour
     {
         if (targetPoint.x > transform.position.x)
         {
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), 1, 1);
+            spriteRenderer.flipX = false;
         }
-        //    spriteRenderer.flipX = false;
-        else if(targetPoint.x < transform.position.x)
+        //    
+        else if (targetPoint.x < transform.position.x)
         {
-            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), 1, 1);
+            spriteRenderer.flipX = true;
         }
-        //    spriteRenderer.flipX = true;
+        //    
     }
 }
