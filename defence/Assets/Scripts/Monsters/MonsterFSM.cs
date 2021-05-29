@@ -38,4 +38,11 @@ public class MonsterFSM : FSMBase
         } while (!isNewState);
         DisableComponent(movementComponent);
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Bullet")
+        {
+            collision.GetComponent<NormalBullet>().CollideWithMonster(this);
+        }
+    }
 }

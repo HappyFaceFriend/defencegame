@@ -58,25 +58,26 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\FSM\Movement\MovementBase.cs" />
     <Compile Include="Assets\Scripts\Player\ItemGuide.cs" />
+    <Compile Include="Assets\Scripts\Towers\TowerFSM.cs" />
     <Compile Include="Assets\Scripts\FSM\FSMBase.cs" />
+    <Compile Include="Assets\Scripts\FSM\FlipSpriteToPoint.cs" />
     <Compile Include="Assets\Scripts\Map\GridManager.cs" />
     <Compile Include="Assets\Scripts\FSM\Movement\DirectionMovement.cs" />
     <Compile Include="Assets\Scripts\FSM\Movement\MovementController.cs" />
+    <Compile Include="Assets\Scripts\Map\BackgroundManager.cs" />
+    <Compile Include="Assets\Scripts\Monsters\MonsterFSM.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerFSM.cs" />
+    <Compile Include="Assets\Scripts\FSM\Movement\RouteMovement.cs" />
     <Compile Include="Assets\Scripts\FSM\FlipObjectToPoint.cs" />
     <Compile Include="Assets\Scripts\GridObject.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHand.cs" />
     <Compile Include="Assets\Scripts\FSM\Movement\ForceMovement.cs" />
+    <Compile Include="Assets\Scripts\Map\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Utils\VectorUtils.cs" />
     <Compile Include="Assets\Scripts\FSM\Movement\Knockback.cs" />
-    <Compile Include="Assets\Scripts\Map\BackgroundManager.cs" />
-    <Compile Include="Assets\Scripts\Monsters\MonsterFSM.cs" />
     <Compile Include="Assets\Scripts\Map\RouteManager.cs" />
-    <Compile Include="Assets\Scripts\FSM\Movement\RouteMovement.cs" />
-    <Compile Include="Assets\Scripts\Map\LevelManager.cs" />
-    <Compile Include="Assets\Scripts\Towers\TowerFSM.cs" />
     <Compile Include="Assets\Scripts\Effector.cs" />
-    <Compile Include="Assets\Scripts\FSM\FlipSpriteToPoint.cs" />
+    <Compile Include="Assets\Scripts\Towers\NormalBullet.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

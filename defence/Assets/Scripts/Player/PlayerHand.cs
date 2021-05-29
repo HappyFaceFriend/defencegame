@@ -65,6 +65,10 @@ public class PlayerHand : MonoBehaviour
         player.SetIsHolding(true);
 
         itemGuide.sprite=heldObject.spriteRenderer.sprite;
+        TowerFSM towerComponent = heldObject.GetComponent<TowerFSM>();
+        if (towerComponent != null)
+            towerComponent.SetHeldByPlayer(true);
+
         heldObject.spriteRenderer.transform.position += new Vector3(0, 0, -0.3f);
         heldObject.GetComponent<Collider2D>().isTrigger = true;
     }
@@ -75,6 +79,9 @@ public class PlayerHand : MonoBehaviour
         heldObject.transform.position = gridManager.WorldPosToGridPos(itemGuide.position);
         heldObject.spriteRenderer.transform.position -= new Vector3(0, 0, -0.3f);
         heldObject.GetComponent<Collider2D>().isTrigger = false;
+        TowerFSM towerComponent = heldObject.GetComponent<TowerFSM>();
+        if (towerComponent != null)
+            towerComponent.SetHeldByPlayer(false);
         heldObject = null;
         player.SetIsHolding(false);
 
