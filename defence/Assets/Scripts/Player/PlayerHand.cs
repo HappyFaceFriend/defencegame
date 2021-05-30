@@ -13,21 +13,36 @@ public class PlayerHand : MonoBehaviour
 
     [SerializeField] ItemGuide itemGuide;
 
+    [SerializeField] float batteryChargeSpeed;
+
     GridObject heldObject;
     GridObject selectedObject;
 
     void Awake()
     {
     }
-
+    public void SpacePressed()
+    {
+        if (heldObject == null && selectedObject != null)
+            HoldSelectedObject();
+        else if (heldObject != null && selectedObject == null)
+            PutDownObject();
+    }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKey(KeyCode.C))
         {
-            if (heldObject == null && selectedObject != null)
-                HoldSelectedObject();
-            else if (heldObject != null && selectedObject == null)
-                PutDownObject();
+            if(selectedObject.Type == GridObject.ItemType.Tower)
+            {
+                if (player.CurrentOtherState != PlayerFSM.OtherState.BatteryCharging)
+                    player.SetState(PlayerFSM.OtherState.BatteryCharging);
+                selectedObject.TowerComponent.SetBattery(selectedObject.TowerComponent.Battery + batteryChargeSpeed * Time.deltaTime);
+            }
+        }
+        if(Input.GetKeyUp(KeyCode.C))
+        {
+            if (player.CurrentOtherState == PlayerFSM.OtherState.BatteryCharging)
+                player.SetState(PlayerFSM.State.Idle);
         }
 
         //detect item at direction
@@ -65,9 +80,8 @@ public class PlayerHand : MonoBehaviour
         player.SetIsHolding(true);
 
         itemGuide.sprite=heldObject.spriteRenderer.sprite;
-        TowerFSM towerComponent = heldObject.GetComponent<TowerFSM>();
-        if (towerComponent != null)
-            towerComponent.SetHeldByPlayer(true);
+        if(heldObject.Type == GridObject.ItemType.Tower)
+            heldObject.TowerComponent.SetHeldByPlayer(true);
 
         heldObject.spriteRenderer.transform.position += new Vector3(0, 0, -0.3f);
         heldObject.GetComponent<Collider2D>().isTrigger = true;
@@ -79,9 +93,8 @@ public class PlayerHand : MonoBehaviour
         heldObject.transform.position = gridManager.WorldPosToGridPos(itemGuide.position);
         heldObject.spriteRenderer.transform.position -= new Vector3(0, 0, -0.3f);
         heldObject.GetComponent<Collider2D>().isTrigger = false;
-        TowerFSM towerComponent = heldObject.GetComponent<TowerFSM>();
-        if (towerComponent != null)
-            towerComponent.SetHeldByPlayer(false);
+        if (heldObject.Type == GridObject.ItemType.Tower)
+            heldObject.TowerComponent.SetHeldByPlayer(true);
         heldObject = null;
         player.SetIsHolding(false);
 

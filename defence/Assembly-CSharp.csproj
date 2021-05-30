@@ -58,7 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\FSM\Movement\MovementBase.cs" />
     <Compile Include="Assets\Scripts\Player\ItemGuide.cs" />
-    <Compile Include="Assets\Scripts\Towers\TowerFSM.cs" />
+    <Compile Include="Assets\Scripts\Towers\BulletShootingTower.cs" />
     <Compile Include="Assets\Scripts\FSM\FSMBase.cs" />
     <Compile Include="Assets\Scripts\FSM\FlipSpriteToPoint.cs" />
     <Compile Include="Assets\Scripts\Map\GridManager.cs" />
@@ -74,12 +74,17 @@
     <Compile Include="Assets\Scripts\FSM\Movement\ForceMovement.cs" />
     <Compile Include="Assets\Scripts\Map\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Utils\VectorUtils.cs" />
+    <Compile Include="Assets\Scripts\Towers\NormalBullet.cs" />
     <Compile Include="Assets\Scripts\FSM\Movement\Knockback.cs" />
     <Compile Include="Assets\Scripts\Map\RouteManager.cs" />
     <Compile Include="Assets\Scripts\Effector.cs" />
-    <Compile Include="Assets\Scripts\Towers\NormalBullet.cs" />
+    <Compile Include="Assets\Scripts\Utils\Files\LevelSpawnData.cs" />
+    <Compile Include="Assets\Scripts\Utils\Files\FileUtils.cs" />
+    <Compile Include="Assets\Scripts\Utils\ExceptionManager.cs" />
+    <Compile Include="Assets\Scripts\Towers\TowerFSMBase.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets\DataFiles\testlevel.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

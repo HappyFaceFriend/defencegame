@@ -6,10 +6,10 @@ public abstract class FSMBase : MonoBehaviour
 {
     public enum State
     {
-        Idle=0, Walk=1, Attack=2
+        Idle=0, Walk=1, Attack=2, Other=10
     }
-    protected State currentState;
-    protected bool isNewState;
+    [SerializeField] protected State currentState;
+    [SerializeField] protected bool isNewState;
 
     protected Rigidbody2D rigidbody;
     protected MovementController movementController;

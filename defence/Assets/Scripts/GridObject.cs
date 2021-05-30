@@ -8,8 +8,18 @@ public class GridObject : MonoBehaviour
 
 
     public SpriteRenderer spriteRenderer;
+    public ItemType Type { get { return type; } }
+    public TowerFSMBase TowerComponent { get { return towerComponent; } }
+
+    public enum ItemType { Tower }
+
+    ItemType type;
+    TowerFSMBase towerComponent;
     private void Awake()
     {
+        towerComponent = GetComponent<TowerFSMBase>();
+        if (towerComponent != null)
+            type = ItemType.Tower;
     }
     private void Start()
     {

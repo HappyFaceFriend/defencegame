@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] Transform spawnPoint;
+    [SerializeField] string levelDataFilePath;
     [SerializeField] GameObject monsterPrefab;
-    [SerializeField] RouteManager routeManager;
-
+    [SerializeField] RouteManager[] routeManagers;
+    
     List<MonsterFSM> monsterList;
 
+    LevelSpawnData levelSpawnData;
+    int currentWave = 0;
 
     public MonsterFSM GetFirstMonsterInRange(Vector3 centerPosition, float range)
     {
@@ -27,6 +29,7 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         monsterList = new List<MonsterFSM>();
+        levelSpawnData = new LevelSpawnData(levelDataFilePath);
     }
     private void Start()
     {
@@ -39,13 +42,16 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator StartWave()
     {
-        float interval = 2f;
-        while(true)
+        int spawnIndex = 0;
+        SpawnCall nextSpwan;
+        while (spawnIndex < levelSpawnData.WaveDatas[currentWave].spawnCalls.Count)
         {
-            GameObject newMonster = Instantiate(monsterPrefab, spawnPoint.position, Quaternion.identity);
-            newMonster.GetComponent<RouteMovement>().routeManager = routeManager;
+            nextSpwan = levelSpawnData.WaveDatas[currentWave].spawnCalls[spawnIndex];
+            yield return new WaitForSeconds(nextSpwan.time);
+            GameObject newMonster = Instantiate(monsterPrefab, routeManagers[nextSpwan.routeNumber].SpawnPoint, Quaternion.identity);
+            newMonster.GetComponent<RouteMovement>().routeManager = routeManagers[nextSpwan.routeNumber];
             monsterList.Add(newMonster.GetComponent<MonsterFSM>());
-            yield return new WaitForSeconds(interval);
+            spawnIndex++;
         }
         yield return null;
     }
