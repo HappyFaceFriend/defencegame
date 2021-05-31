@@ -5,58 +5,37 @@ using UnityEngine;
 
 public class PlayerHand : MonoBehaviour
 {
+    public bool IsHoldingObject { get { return heldObject != null; } }
+    public bool IsObjectInFront { get { return selectedObject != null; } }
+    
+    public GridObject SelectedObject {  get { return selectedObject; } }
+    [Header("References")]
+    [SerializeField] PlayerFSM player;
+    [SerializeField] GridManager gridManager;
+    [SerializeField] ItemGuide itemGuide;
+    [Header("Holding Positions")]
     [SerializeField] Vector3 sidePos;
     [SerializeField] Vector3 upPos;
     [SerializeField] Vector3 downPos;
-    [SerializeField] PlayerFSM player;
-    [SerializeField] GridManager gridManager;
 
-    [SerializeField] ItemGuide itemGuide;
-
-    [SerializeField] float batteryChargeSpeed;
 
     GridObject heldObject;
     GridObject selectedObject;
 
+    Vector2Int cellInFront;
+
     void Awake()
     {
-    }
-    public void SpacePressed()
-    {
-        if (heldObject == null && selectedObject != null)
-            HoldSelectedObject();
-        else if (heldObject != null && selectedObject == null)
-            PutDownObject();
+        cellInFront = gridManager.WorldPosToGridIndex(player.transform.position) + Vector2Int.RoundToInt(player.LastInputVector);
     }
     private void Update()
     {
-        if(Input.GetKey(KeyCode.C))
-        {
-            if(selectedObject.Type == GridObject.ItemType.Tower)
-            {
-                if (player.CurrentOtherState != PlayerFSM.OtherState.BatteryCharging)
-                    player.SetState(PlayerFSM.OtherState.BatteryCharging);
-                selectedObject.TowerComponent.SetBattery(selectedObject.TowerComponent.Battery + batteryChargeSpeed * Time.deltaTime);
-            }
-        }
-        if(Input.GetKeyUp(KeyCode.C))
-        {
-            if (player.CurrentOtherState == PlayerFSM.OtherState.BatteryCharging)
-                player.SetState(PlayerFSM.State.Idle);
-        }
-
         //detect item at direction
-        itemGuide.position = gridManager.WorldPosToGridPos(VectorUtils.Vec3toVec2(player.transform.position) + player.LastInputVector);
-        GridObject newObject = gridManager.GetObjectAt(itemGuide.position);
-        if(newObject != selectedObject)
-        {
-            if(selectedObject != null)
-                selectedObject.SetSelected(false);
-            selectedObject = newObject;
-            if (selectedObject != null && heldObject == null)
-                selectedObject.SetSelected(true);
-        }
-
+        cellInFront = gridManager.WorldPosToGridIndex(player.transform.position) + Vector2Int.RoundToInt(player.LastInputVector);
+        itemGuide.position = gridManager.GridIndexToWorldPos(cellInFront);
+        selectedObject = gridManager.GetObjectAt(cellInFront);
+        //TODO : currently ignoring add-ons to tower
+        itemGuide.SetState(IsObjectInFront, IsObjectInFront && !IsHoldingObject || !IsObjectInFront && IsHoldingObject);
         //change how the player holds item as direction changes (visuals)
         if (player.LastInputVector.y == 1)
             transform.localPosition = upPos;
@@ -64,40 +43,40 @@ public class PlayerHand : MonoBehaviour
             transform.localPosition = downPos;
         if (player.LastInputVector.x != 0)
             transform.localPosition = sidePos;
-
         if (heldObject != null)
-        {
             heldObject.transform.position = transform.position;
-        }
-
     }
-
 
     public void HoldSelectedObject()
     {
-        gridManager.RemoveObjectAt(selectedObject.transform.position);
-        heldObject = selectedObject;
-        player.SetIsHolding(true);
+        heldObject = gridManager.RemoveObjectAt(selectedObject.transform.position);
+        player.IsHolding = true;
 
-        itemGuide.sprite=heldObject.spriteRenderer.sprite;
+        itemGuide.InitCopiedImage(heldObject.GenerateImageCopy(itemGuide.transform));
         if(heldObject.Type == GridObject.ItemType.Tower)
             heldObject.TowerComponent.SetHeldByPlayer(true);
-
-        heldObject.spriteRenderer.transform.position += new Vector3(0, 0, -0.3f);
         heldObject.GetComponent<Collider2D>().isTrigger = true;
     }
 
     public void PutDownObject()
     {
         gridManager.PutObjectAt(itemGuide.position, heldObject);
+        player.IsHolding = false;
+
         heldObject.transform.position = gridManager.WorldPosToGridPos(itemGuide.position);
-        heldObject.spriteRenderer.transform.position -= new Vector3(0, 0, -0.3f);
         heldObject.GetComponent<Collider2D>().isTrigger = false;
         if (heldObject.Type == GridObject.ItemType.Tower)
-            heldObject.TowerComponent.SetHeldByPlayer(true);
+            heldObject.TowerComponent.SetHeldByPlayer(false);
         heldObject = null;
-        player.SetIsHolding(false);
 
-        itemGuide.sprite = null;
+        Destroy(itemGuide.CopiedImage.gameObject);
+        itemGuide.CopiedImage = null;
+    }
+
+    public void ChargeTowerInFront(float chargeSpeed)
+    {
+        if(selectedObject.Type == GridObject.ItemType.Tower)
+            selectedObject.TowerComponent.SetBattery(selectedObject.TowerComponent.Battery + chargeSpeed * Time.deltaTime);
+
     }
 }

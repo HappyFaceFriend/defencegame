@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterFSM : FSMBase
+public class MonsterFSM : MonsterFSMBase
 {
     RouteMovement movementComponent;
     FlipSpriteToPoint spriteFlipComponent;
@@ -14,7 +14,6 @@ public class MonsterFSM : FSMBase
         base.Awake();
         movementComponent = GetComponent<RouteMovement>();
         spriteFlipComponent = GetComponent<FlipSpriteToPoint>();
-
 
     }
     void Update()
@@ -31,12 +30,12 @@ public class MonsterFSM : FSMBase
     }
     IEnumerator Walk()
     {
-        EnableComponent(movementComponent);
+        movementComponent.enabled = true;
         do
         {
             yield return null;
         } while (!isNewState);
-        DisableComponent(movementComponent);
+        movementComponent.enabled = false;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class BulletShootingTower : TowerFSMBase
 {
-
+    [Header("BulletShootingTower References")]
     [SerializeField] Transform gunTransform;
-
     [SerializeField] GameObject bulletPrefab;
-    [SerializeField] float shootInterval;
 
+    [Header("BulletShootingTower Stats")]
+    [SerializeField] float shootInterval;
     [SerializeField] float range;
     
     MonsterFSM targetMonster;
@@ -19,13 +19,6 @@ public class BulletShootingTower : TowerFSMBase
     {
         base.Awake();
         eTime = shootInterval;
-    }
-    IEnumerator Held()
-    {
-        do
-        {
-            yield return null;
-        } while (!isNewState);
     }
     IEnumerator Idle()
     {
