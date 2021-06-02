@@ -10,12 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 435846881817199176}
   - component: {fileID: 435846881817199177}
-  - component: {fileID: 435846881817199182}
   - component: {fileID: 435846881817199154}
   - component: {fileID: 435846881817199180}
   - component: {fileID: 435846881817199183}
   - component: {fileID: -7388629150561238620}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,22 +57,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &435846881817199182
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 435846881817199155}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!61 &435846881817199154
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -112,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2153f00f4660a145876d33c8a36fbed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 1.5
+  moveSpeed: 1
 --- !u!114 &435846881817199183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +108,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3729488daf7e24e4bbae7c5bd93d1410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   imageTransform: {fileID: 435846883031661726}
+  animator: {fileID: 0}
+  maxHp: 50
+  moveSpeed: 1
+  currentHp: 0
 --- !u!114 &-7388629150561238620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +138,7 @@ GameObject:
   - component: {fileID: 435846883031661726}
   - component: {fileID: 435846883031661727}
   - component: {fileID: 435846883031661724}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}

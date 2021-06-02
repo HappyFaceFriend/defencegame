@@ -1,0 +1,221 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.6f1 (338bb68529b2) revision 3378102'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 19041.867; Version 2004; 64bit' Language: 'ko' Physical Memory: 16321 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.3.6f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+D:/defence/defence
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+53906
+Successfully changed project path to: D:/defence/defence
+D:/defence/defence
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 46.03 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.6f1 (338bb68529b2)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/defence/defence/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1060 3GB (ID=0x1c02)
+    Vendor:   
+    VRAM:     2988 MB
+    Driver:   27.21.14.5671
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56504
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.006343 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 56.20 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.993 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.001845 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 41.20 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.673 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.11 seconds
+Refreshing native plugins compatible for Editor in 0.40 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1836 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 88.2 MB.
+System memory in use after: 88.1 MB.
+
+Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 2280.
+Total: 3.336600 ms (FindLiveObjects: 0.225000 ms CreateObjectMapping: 0.106400 ms MarkObjects: 2.866700 ms  DeleteObjects: 0.136800 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Images/Player/Items/towerMaker.png
+  artifactKey: Guid(1723da7a9710fd945b4e8c92dbf3704b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Player/Items/towerMaker.png using Guid(1723da7a9710fd945b4e8c92dbf3704b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3dedbe3d9fb756af2372f2b99520f6d5') in 0.164507 seconds
+  Import took 0.175312 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 33.163860 seconds.
+  path: Assets/Images/Player/Items/towerMaker.png
+  artifactKey: Guid(1723da7a9710fd945b4e8c92dbf3704b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Player/Items/towerMaker.png using Guid(1723da7a9710fd945b4e8c92dbf3704b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0dd78b88f4a21770d11747eed9dde88a') in 0.018002 seconds
+  Import took 0.022476 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.906690 seconds.
+  path: Assets/Images/Player/Items/towerMaker.png
+  artifactKey: Guid(1723da7a9710fd945b4e8c92dbf3704b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Player/Items/towerMaker.png using Guid(1723da7a9710fd945b4e8c92dbf3704b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fc59d7dcb1aa4622d81f89c4d97d84f5') in 0.018601 seconds
+  Import took 0.026875 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000334 seconds.
+  path: Assets/Images/Player/Items/towerMaker.png
+  artifactKey: Guid(1723da7a9710fd945b4e8c92dbf3704b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Player/Items/towerMaker.png using Guid(1723da7a9710fd945b4e8c92dbf3704b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fc59d7dcb1aa4622d81f89c4d97d84f5') in 0.031969 seconds
+  Import took 0.038989 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 21.135171 seconds.
+  path: Assets/Images/Player/Items/towerMaker.png
+  artifactKey: Guid(1723da7a9710fd945b4e8c92dbf3704b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Player/Items/towerMaker.png using Guid(1723da7a9710fd945b4e8c92dbf3704b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9a2563679e3270f1ae2bc664533a5663') in 0.044107 seconds
+  Import took 0.053393 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 309.530175 seconds.
+  path: Assets/Images/Player/Items/towerMaker.anim
+  artifactKey: Guid(f23e798b8dc3e1b4db82172cf90e32a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Player/Items/towerMaker.anim using Guid(f23e798b8dc3e1b4db82172cf90e32a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'acfb86a42fd3d7fb7e1263db757402d1') in 0.038789 seconds
+  Import took 0.059766 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 31.036072 seconds.
+  path: Assets/Animation/Player/Items
+  artifactKey: Guid(3626a64a85ba81c40bc345a0c25a3a5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/Player/Items using Guid(3626a64a85ba81c40bc345a0c25a3a5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '23c01429d25519fc0674a53784b510c8') in 0.024720 seconds
+  Import took 0.039985 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.674634 seconds.
+  path: Assets/Animation/Player/Items/TowerMaker
+  artifactKey: Guid(8db6a65761d34dd4081a322751b930b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/Player/Items/TowerMaker using Guid(8db6a65761d34dd4081a322751b930b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '37e5e98b665d10042a6d03133cc89d72') in 0.017839 seconds
+  Import took 0.034849 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.628843 seconds.
+  path: Assets/Animation/Player/towerMaker_0.controller
+  artifactKey: Guid(d6f49220ff0c952499aa0fbb00b7bdb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/Player/towerMaker_0.controller using Guid(d6f49220ff0c952499aa0fbb00b7bdb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3f87d49088587c90115db29f3430382') in 0.016834 seconds
+  Import took 0.033880 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001324 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.38 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.789 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.38 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1831 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 91.2 MB.
+System memory in use after: 91.2 MB.
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 2292.
+Total: 8.228000 ms (FindLiveObjects: 0.332700 ms CreateObjectMapping: 0.130900 ms MarkObjects: 7.586100 ms  DeleteObjects: 0.176300 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001178 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.39 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.530 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 3.61 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1831 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 91.3 MB.
+System memory in use after: 91.2 MB.
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 2296.
+Total: 3.011600 ms (FindLiveObjects: 0.296600 ms CreateObjectMapping: 0.160600 ms MarkObjects: 2.449500 ms  DeleteObjects: 0.103600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001127 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.35 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.291 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.37 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1831 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 91.3 MB.
+System memory in use after: 91.3 MB.
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 2300.
+Total: 2.481400 ms (FindLiveObjects: 0.190100 ms CreateObjectMapping: 0.072700 ms MarkObjects: 2.114300 ms  DeleteObjects: 0.102800 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.002062 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.33 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.640 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.35 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1831 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 91.3 MB.
+System memory in use after: 91.3 MB.
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 2304.
+Total: 2.226700 ms (FindLiveObjects: 0.166700 ms CreateObjectMapping: 0.071600 ms MarkObjects: 1.873500 ms  DeleteObjects: 0.113100 ms)
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

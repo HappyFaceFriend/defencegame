@@ -9,7 +9,7 @@ public class TowerFSMBase : MonoBehaviour
     public Transform ImagesTransform{ get { return imagesTransform; } }
 
     [Header("Base References")]
-    [SerializeField] protected LevelManager levelManager;
+    protected LevelManager levelManager;
     [SerializeField] protected Transform imagesTransform;
     [SerializeField] protected Transform batteryOut;
 
@@ -20,7 +20,7 @@ public class TowerFSMBase : MonoBehaviour
 
     public enum State
     {
-        Idle = 0, Attack = 1, BatteryOut = 2, Held = 3
+        Idle = 0, Attack = 1, BatteryOut = 2, Held = 3, Ready = 4
     }
     [ReadOnly] [SerializeField] protected State currentState;
     protected bool isNewState;
@@ -29,9 +29,13 @@ public class TowerFSMBase : MonoBehaviour
     
     protected Animator animator;
 
+    public void SetReferences(LevelManager levelManager)
+    {
+        this.levelManager = levelManager;
+    }
     protected void Awake()
     {
-        currentState = State.Idle;
+        currentState = State.Ready;
         animator = imagesTransform.GetComponent<Animator>();
 
     }
@@ -92,6 +96,13 @@ public class TowerFSMBase : MonoBehaviour
         } while (!isNewState);
     }
     protected virtual IEnumerator Held()
+    {
+        do
+        {
+            yield return null;
+        } while (!isNewState);
+    }
+    protected virtual IEnumerator Ready()
     {
         do
         {

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class MovementBase : MonoBehaviour
 {
+    [SerializeField] float moveSpeed;
+    public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
     /// <summary>
     /// returns a movement which is added at FixedUpdate(). this function is called every FixedUpdate().
     /// </summary>

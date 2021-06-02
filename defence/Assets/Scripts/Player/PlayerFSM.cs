@@ -93,16 +93,20 @@ public class PlayerFSM : MonoBehaviour
         //hold & put down
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (hand.IsObjectInFront && !hand.IsHoldingObject)
+            if (hand.IsObjectInFront && !hand.IsHoldingObject && hand.SelectedObject.Type == GridObject.ItemType.Tower)
                 hand.HoldSelectedObject();
             else if (!hand.IsObjectInFront && hand.IsHoldingObject)
                 hand.PutDownObject();
+            else if(hand.IsObjectInFront && !hand.IsHoldingObject && hand.SelectedObject.Type == GridObject.ItemType.TowerMaker)
+            {
+                hand.SelectedObject.TowerMakerComponent.CreateTower();
+            }
         }
         if (Input.GetKey(KeyCode.C))
         {
             if (hand.IsObjectInFront && hand.SelectedObject.Type == GridObject.ItemType.Tower)
             {
-                if(CurrentState != PlayerFSM.State.BatteryCharging)
+                if(CurrentState != PlayerFSM.State.BatteryCharging && !isHolding)
                     SetState(PlayerFSM.State.BatteryCharging);
                 hand.ChargeTowerInFront(batteryChargeSpeed);
             }

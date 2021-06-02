@@ -8,10 +8,12 @@ public class NormalBullet : MonoBehaviour
 
     Transform targetTransform;
     float range;
-    public void Fire(Transform targetTransform)
+    float attack;
+    public void Fire(Transform targetTransform, float attack)
     {
         this.targetTransform = targetTransform;
         this.enabled = true;
+        this.attack = attack;
     }
 
     private void Update()
@@ -22,8 +24,12 @@ public class NormalBullet : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, targetTransform.position, moveSpeed * Time.deltaTime);
 
     }
-    public void CollideWithMonster(MonsterFSM monster)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+        MonsterFSMBase monster = collision.gameObject.GetComponent<MonsterFSMBase>();
+        if (monster == null)
+            return;
+        monster.TakeDamage(attack);
         Destroy(gameObject);
     }
 }

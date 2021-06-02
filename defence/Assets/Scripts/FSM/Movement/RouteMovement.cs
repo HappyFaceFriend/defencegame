@@ -6,8 +6,6 @@ public class RouteMovement : MovementBase
 {
     public RouteManager routeManager {  set { _routeManager = value; } }
 
-    [SerializeField] float _moveSpeed;
-    public float moveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
     public Vector2 Direction { get { return direction; } }
 
     RouteManager _routeManager;
@@ -28,7 +26,7 @@ public class RouteMovement : MovementBase
         currentIndex++;
         if(currentIndex >= _routeManager.TargetCount)
         {
-            moveSpeed = 0;
+            MoveSpeed = 0;
             currentIndex--;
         }
         currentTarget = _routeManager.GetTargetPoint(currentIndex);
@@ -36,7 +34,7 @@ public class RouteMovement : MovementBase
 
     public override Vector2 ApplyMovement(bool isPlayingKnockback)
     {
-        Vector3 moveDelta = Vector3.MoveTowards(transform.position, currentTarget, moveSpeed * Time.fixedDeltaTime) - transform.position;
+        Vector3 moveDelta = Vector3.MoveTowards(transform.position, currentTarget, MoveSpeed * Time.fixedDeltaTime) - transform.position;
         if (moveDelta == Vector3.zero)
         {
             SetNextPoint();

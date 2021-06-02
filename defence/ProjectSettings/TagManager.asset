@@ -13,10 +13,10 @@ TagManager:
   - 
   - Water
   - UI
-  - ObjectSpace
-  - HitBox
-  - 
-  - 
+  - Player
+  - Monster
+  - Tower
+  - Bullet
   - 
   - 
   - 

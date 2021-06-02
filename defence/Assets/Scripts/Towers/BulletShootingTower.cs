@@ -11,8 +11,9 @@ public class BulletShootingTower : TowerFSMBase
     [Header("BulletShootingTower Stats")]
     [SerializeField] float shootInterval;
     [SerializeField] float range;
-    
-    MonsterFSM targetMonster;
+    [SerializeField] float attack;
+
+    MonsterFSMBase targetMonster;
 
     float eTime;
     new void Awake()
@@ -39,6 +40,11 @@ public class BulletShootingTower : TowerFSMBase
     {
         do
         {
+            if (targetMonster.CurrentState == MonsterFSMBase.State.Dead)
+            {
+                SetState(State.Idle);
+                continue;
+            }
             Vector3 distanceVector = targetMonster.transform.position - gunTransform.position;
             if(distanceVector.sqrMagnitude >= range*range)
             {
@@ -61,7 +67,7 @@ public class BulletShootingTower : TowerFSMBase
     void Shoot()
     {
         GameObject temp = Instantiate(bulletPrefab, gunTransform.position, Quaternion.identity);
-        temp.GetComponent<NormalBullet>().Fire(targetMonster.transform);
+        temp.GetComponent<NormalBullet>().Fire(targetMonster.transform, attack);
         SetBattery(Battery - 25);
     }
 }

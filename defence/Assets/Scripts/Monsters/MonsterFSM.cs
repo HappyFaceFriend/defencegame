@@ -13,6 +13,7 @@ public class MonsterFSM : MonsterFSMBase
     {
         base.Awake();
         movementComponent = GetComponent<RouteMovement>();
+        movementComponent.MoveSpeed = moveSpeed;
         spriteFlipComponent = GetComponent<FlipSpriteToPoint>();
 
     }
@@ -36,12 +37,5 @@ public class MonsterFSM : MonsterFSMBase
             yield return null;
         } while (!isNewState);
         movementComponent.enabled = false;
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Bullet")
-        {
-            collision.GetComponent<NormalBullet>().CollideWithMonster(this);
-        }
     }
 }

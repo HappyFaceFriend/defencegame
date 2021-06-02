@@ -7,14 +7,15 @@ public class GridObject : MonoBehaviour
 
     public ItemType Type { get { return type; } }
     public TowerFSMBase TowerComponent { get { return towerComponent; } }
+    public TowerMaker TowerMakerComponent { get { return towerMakerComponent; } }
 
-    [SerializeField] GridManager gridManager;
 
     Transform imageTransform;
-    public enum ItemType { Tower }
+    public enum ItemType { Tower, TowerMaker }
 
     ItemType type;
     TowerFSMBase towerComponent;
+    [SerializeField] TowerMaker towerMakerComponent;
     public ImageCopy GenerateImageCopy(Transform parentTransform)
     {
         Transform imageCopy = Instantiate(imageTransform.gameObject, parentTransform.position, Quaternion.identity).GetComponent<Transform>();
@@ -30,11 +31,16 @@ public class GridObject : MonoBehaviour
             type = ItemType.Tower;
             imageTransform = towerComponent.ImagesTransform;
         }
+        else
+        {
+            type = ItemType.TowerMaker;
+        }
     }
     
     private void Start()
     {
-        gridManager.PutObjectAt(transform.position, this);
+        //gridManager.PutObjectAt(transform.position, this);
+
     }
     /*public void SetSelected(bool selected)
     {
