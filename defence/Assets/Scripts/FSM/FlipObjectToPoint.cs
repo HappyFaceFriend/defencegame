@@ -6,8 +6,6 @@ public class FlipObjectToPoint : MonoBehaviour
 {
     public Vector2 targetPoint { get; set; }
 
-    [SerializeField]
-    SpriteRenderer spriteRenderer = null;
 
     void Update()
     {

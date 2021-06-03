@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public float SucceedRate { get { return succeedRate; } set { succeedRate = value; } }
+
     [Header("References")]
     [SerializeField] string levelDataFilePath;
     [SerializeField] GameObject monsterPrefab;
     [SerializeField] RouteManager[] routeManagers;
     [SerializeField] GridManager gridManager;
     [SerializeField] TowerMaker towerMaker;
+    [SerializeField] float succeedRate = 100;
 
     List<MonsterFSMBase> monsterList;
 
     LevelSpawnData levelSpawnData;
     int currentWave = 0;
+
 
     public MonsterFSMBase GetFirstMonsterInRange(Vector3 centerPosition, float range)
     {
@@ -43,7 +47,6 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         towerMaker.transform.position = gridManager.WorldPosToGridPos(towerMaker.transform.position);
-        towerMaker.CreateTower();
         StartLevel();
     }
     void StartLevel()

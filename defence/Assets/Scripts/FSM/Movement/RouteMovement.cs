@@ -5,16 +5,18 @@ using UnityEngine;
 public class RouteMovement : MovementBase
 {
     public RouteManager routeManager {  set { _routeManager = value; } }
-
     public Vector2 Direction { get { return direction; } }
+    public bool IsEndOfRoute { get { return isEndOfRoute; } }
 
     RouteManager _routeManager;
     Vector3 currentTarget;
     int currentIndex;
+    bool isEndOfRoute;
     Vector2 direction;
     void Awake()
     {
-        currentIndex = -1;
+        isEndOfRoute = false;
+        currentIndex = 0;
     }
     private void Start()
     {
@@ -28,6 +30,7 @@ public class RouteMovement : MovementBase
         {
             MoveSpeed = 0;
             currentIndex--;
+            isEndOfRoute = true;
         }
         currentTarget = _routeManager.GetTargetPoint(currentIndex);
     }

@@ -2,32 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerFSMBase : MonoBehaviour
+public class TowerFSMBase : HoldableObject
 {
-
+    public enum State
+    {
+        Idle = 0, Attack = 1, BatteryOut = 2, Held = 3, Ready = 4
+    }
     public float Battery { get { return battery; } }
-    public Transform ImagesTransform{ get { return imagesTransform; } }
 
     [Header("Base References")]
     protected LevelManager levelManager;
     [SerializeField] protected Transform imagesTransform;
     [SerializeField] protected Transform batteryOut;
 
-
     [Header("Base Stats")]
-    [ReadOnly][SerializeField] float battery = 100;
+    [ReadOnly] [SerializeField] float battery = 100;
+    [ReadOnly] [SerializeField] protected State currentState;
     [SerializeField] protected bool worksWhileHolding;
 
-    public enum State
-    {
-        Idle = 0, Attack = 1, BatteryOut = 2, Held = 3, Ready = 4
-    }
-    [ReadOnly] [SerializeField] protected State currentState;
-    protected bool isNewState;
-
-
-    
     protected Animator animator;
+    protected bool isNewState;
 
     public void SetReferences(LevelManager levelManager)
     {
@@ -37,7 +31,7 @@ public class TowerFSMBase : MonoBehaviour
     {
         currentState = State.Ready;
         animator = imagesTransform.GetComponent<Animator>();
-
+        imageCopyTransform = imagesTransform;
     }
 
     protected void Start()
@@ -109,4 +103,5 @@ public class TowerFSMBase : MonoBehaviour
             yield return null;
         } while (!isNewState);
     }
+
 }

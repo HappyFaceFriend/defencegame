@@ -32,7 +32,7 @@ AnimationClip:
     - time: 0.5
       value: {fileID: -3684617228305449675, guid: 1723da7a9710fd945b4e8c92dbf3704b, type: 3}
     attribute: m_Sprite
-    path: Image
+    path: TowerMaker/Image
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 60
@@ -43,7 +43,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 83635035
+      path: 2558330572
       attribute: 0
       script: {fileID: 0}
       typeID: 212

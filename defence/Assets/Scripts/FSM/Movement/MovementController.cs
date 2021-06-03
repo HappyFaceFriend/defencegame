@@ -7,7 +7,7 @@ public class MovementController : MonoBehaviour
     List<MovementBase> movementList = new List<MovementBase>();
     //Knockback knockback;
 
-    Rigidbody2D rigidbody;
+    new Rigidbody2D rigidbody;
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();

@@ -207,7 +207,6 @@ GameObject:
   - component: {fileID: 2142072748314552176}
   - component: {fileID: 2142072748314552183}
   - component: {fileID: 2142072748314552182}
-  - component: {fileID: 2142072748314552181}
   - component: {fileID: 2142072748314552180}
   m_Layer: 8
   m_Name: Temp Tower
@@ -279,19 +278,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8125, y: 0.75}
   m_EdgeRadius: 0
---- !u!114 &2142072748314552181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142072748314552171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 675e5931cb8c8214d8ae54bb0f202b9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerMakerComponent: {fileID: 0}
 --- !u!114 &2142072748314552180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,8 +293,8 @@ MonoBehaviour:
   imagesTransform: {fileID: 2142072748122283410}
   batteryOut: {fileID: 2142072749388057886}
   battery: 100
-  worksWhileHolding: 0
   currentState: 0
+  worksWhileHolding: 0
   gunTransform: {fileID: 2142072747319574220}
   bulletPrefab: {fileID: 742295947295984211, guid: a15e35fd9b9655c4ab6b7ad8cf92c099, type: 3}
   shootInterval: 1

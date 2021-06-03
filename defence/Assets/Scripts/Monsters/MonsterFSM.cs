@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MonsterFSM : MonsterFSMBase
 {
-    RouteMovement movementComponent;
     FlipSpriteToPoint spriteFlipComponent;
     Vector3 nextTargetPoint;
 
@@ -12,8 +11,6 @@ public class MonsterFSM : MonsterFSMBase
     new void Awake()
     {
         base.Awake();
-        movementComponent = GetComponent<RouteMovement>();
-        movementComponent.MoveSpeed = moveSpeed;
         spriteFlipComponent = GetComponent<FlipSpriteToPoint>();
 
     }
@@ -34,8 +31,17 @@ public class MonsterFSM : MonsterFSMBase
         movementComponent.enabled = true;
         do
         {
+            if (movementComponent.IsEndOfRoute)
+                SetState(State.EndOfRoad);
             yield return null;
         } while (!isNewState);
         movementComponent.enabled = false;
+    }
+    IEnumerator EndOfRoad()
+    {
+        do
+        {
+            yield return null;
+        } while (!isNewState);
     }
 }

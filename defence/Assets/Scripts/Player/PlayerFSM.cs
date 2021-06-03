@@ -28,8 +28,7 @@ public class PlayerFSM : MonoBehaviour
     
 
     bool isNewState;
-
-    Rigidbody2D rigidbody;
+    new Rigidbody2D rigidbody;
     MovementController movementController;
 
     Animator animator;
@@ -93,18 +92,18 @@ public class PlayerFSM : MonoBehaviour
         //hold & put down
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (hand.IsObjectInFront && !hand.IsHoldingObject && hand.SelectedObject.Type == GridObject.ItemType.Tower)
+            if (hand.SelectedObject!=null && !hand.IsHoldingObject && hand.SelectedObject is HoldableObject)
                 hand.HoldSelectedObject();
-            else if (!hand.IsObjectInFront && hand.IsHoldingObject)
+            else if (hand.SelectedBackground == GridBackground.Empty && hand.IsHoldingObject && hand.SelectedObject == null)
                 hand.PutDownObject();
-            else if(hand.IsObjectInFront && !hand.IsHoldingObject && hand.SelectedObject.Type == GridObject.ItemType.TowerMaker)
+            else if(hand.SelectedObject!=null && !hand.IsHoldingObject && hand.SelectedObject is InteractableObject)
             {
-                hand.SelectedObject.TowerMakerComponent.CreateTower();
+                (hand.SelectedObject as InteractableObject).Interact();
             }
         }
         if (Input.GetKey(KeyCode.C))
         {
-            if (hand.IsObjectInFront && hand.SelectedObject.Type == GridObject.ItemType.Tower)
+            if (hand.SelectedObject!= null && hand.SelectedObject is TowerFSMBase)
             {
                 if(CurrentState != PlayerFSM.State.BatteryCharging && !isHolding)
                     SetState(PlayerFSM.State.BatteryCharging);

@@ -6,14 +6,15 @@ public abstract class MonsterFSMBase : MonoBehaviour
 {
     public enum State
     {
-        Idle=0, Walk=1, Attack=2, Dead = 3
+        Idle=0, Walk=1, Attack=2, Dead = 3, EndOfRoad = 4
     }
     public State CurrentState { get { return currentState; } }
     [ReadOnly][SerializeField] protected State currentState;
     protected bool isNewState;
 
-    protected Rigidbody2D rigidbody;
+    new protected Rigidbody2D rigidbody;
     protected MovementController movementController;
+    protected RouteMovement movementComponent;
 
     [Header("Base References")]
     [SerializeField] protected Transform imageTransform;
@@ -25,12 +26,24 @@ public abstract class MonsterFSMBase : MonoBehaviour
     [SerializeField] protected float moveSpeed;
     [ReadOnly] [SerializeField] protected float currentHp;
 
+    public void SetMoveSpeed(float moveSpeed)
+    {
+        this.moveSpeed = moveSpeed;
+        movementComponent.MoveSpeed = moveSpeed;
+    }
+    public void MultiplyMoveSpeed(float moveSpeedAlpha)
+    {
+        this.moveSpeed *= moveSpeedAlpha;
+        movementComponent.MoveSpeed *= moveSpeedAlpha;
+    }
 
     protected void Awake()
     {
 
         rigidbody = GetComponent<Rigidbody2D>();
         movementController = gameObject.AddComponent<MovementController>();
+        movementComponent = GetComponent<RouteMovement>();
+        movementComponent.MoveSpeed = moveSpeed;
         animator = imageTransform.GetComponent<Animator>();
         spriteRenderer = imageTransform.GetComponent<SpriteRenderer>();
         SetState(State.Walk);

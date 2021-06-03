@@ -40,6 +40,7 @@ public class ItemGuide : MonoBehaviour
             whiteBox.color = whiteBoxUnselected;
             if (copiedImage != null)
                 copiedImage.SetColor(ghostPlacable);
+
         }
         else
         {
@@ -64,5 +65,11 @@ public class ItemGuide : MonoBehaviour
         copiedImage = imageCopy;
         imageCopy.SetLayer("ItemGuide");
         imageCopy.SetColor(ghostPlacable);
+    }
+
+    public void DestroyImageCopy()
+    {
+        Destroy(copiedImage.gameObject);
+        copiedImage = null;
     }
 }
