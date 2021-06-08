@@ -8,8 +8,11 @@ public class TowerMaker : InteractableObject
     [SerializeField] GridManager gridManager;
     [SerializeField] LevelManager levelManager;
     [SerializeField] Transform towerTable;
+    [SerializeField] HUDManager hudManager;
+
     [Header("Stats")]
     [SerializeField] float animDuration;
+
     TowerFSMBase movingTower;
     Animator animator;
     bool isGenerating;
@@ -40,7 +43,8 @@ public class TowerMaker : InteractableObject
         }
         animator.speed = 0;
         movingTower.transform.position = towerTable.position;
-        movingTower.SetReferences(levelManager);
+        
+        movingTower.Init(levelManager, hudManager.InstantiateStatusBar(hudManager.TowerEnergyBarPrefab));
         gridManager.AddObjectAt(towerTable.position, movingTower);
         isTowerSet = true;
         isGenerating = false;

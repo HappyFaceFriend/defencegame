@@ -5,7 +5,6 @@ using UnityEngine;
 public class MonsterFSM : MonsterFSMBase
 {
     FlipSpriteToPoint spriteFlipComponent;
-    Vector3 nextTargetPoint;
 
 
     new void Awake()

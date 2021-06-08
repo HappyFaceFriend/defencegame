@@ -9,11 +9,13 @@ public class NormalBullet : MonoBehaviour
     Transform targetTransform;
     float range;
     float attack;
+    bool isDead;
     public void Fire(Transform targetTransform, float attack)
     {
         this.targetTransform = targetTransform;
         this.enabled = true;
         this.attack = attack;
+        isDead = false;
     }
 
     private void Update()
@@ -26,10 +28,13 @@ public class NormalBullet : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (isDead)
+            return;
         MonsterFSMBase monster = collision.gameObject.GetComponent<MonsterFSMBase>();
         if (monster == null)
             return;
         monster.TakeDamage(attack);
+        isDead = true;
         Destroy(gameObject);
     }
 }

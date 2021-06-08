@@ -11,14 +11,17 @@ public class ItemGuide : MonoBehaviour
     [Header("References")]
     [SerializeField] GridManager gridManager;
     [SerializeField] Animator gridTargetAnim;
-    [SerializeField] SpriteRenderer whiteBox;
-    [Header("Whitebox Colors")]
-    [SerializeField] Color whiteBoxSelected;
-    [SerializeField] Color whiteBoxUnselected;
-    [SerializeField] Color whiteBoxRed;
+    [SerializeField] SpriteRenderer guideBox;
+
+    [Header("Box Colors")]
+    [SerializeField] Color boxColorSelected;
+    [SerializeField] Color boxColorUnselected;
+    [SerializeField] Color boxColorRed;
+
     [Header("Ghost Colors")]
     [SerializeField] Color ghostPlacable;
     [SerializeField] Color ghostUnplacable;
+
     ImageCopy copiedImage = null;
     /*
     하양 : 뭔가 없음 (스페이스바 누를 수 없음)
@@ -32,32 +35,35 @@ public class ItemGuide : MonoBehaviour
         if (copiedImage != null)
             copiedImage.SetPosition(transform.position);
     }
-    public void SetState(bool isSelected, bool isInteractable)
+    public void SetState(bool isSelected, bool isInteractable, GridBackground background)
     {
-        if(!isSelected)
-        {
+        bool isNothingInFront = (!isSelected && background == GridBackground.Empty);
+        if (!isSelected)
             gridTargetAnim.SetBool("IsSelected", false);
-            whiteBox.color = whiteBoxUnselected;
-            if (copiedImage != null)
-                copiedImage.SetColor(ghostPlacable);
+        else
+            gridTargetAnim.SetBool("IsSelected", true);
 
+        if (!isNothingInFront && !isInteractable)
+        {
+            guideBox.color = boxColorRed;
+        }
+        else if (isNothingInFront && !isInteractable)
+        {
+            guideBox.color = boxColorUnselected;
         }
         else
         {
-            gridTargetAnim.SetBool("IsSelected", true);
-            if (isInteractable)
-            {
-                whiteBox.color = whiteBoxSelected;
-                if(copiedImage != null)
-                    copiedImage.SetColor(ghostPlacable);
-            }
-            else
-            {
-                whiteBox.color = whiteBoxRed;
-                if (copiedImage != null)
-                    copiedImage.SetColor(ghostUnplacable);
-            }
+            guideBox.color = boxColorSelected;
         }
+
+        if (copiedImage != null)
+        {
+            if (!isInteractable)
+                copiedImage.SetColor(ghostUnplacable);
+            else
+                copiedImage.SetColor(ghostPlacable);
+        }
+
     }
 
     public void InitCopiedImage(ImageCopy imageCopy)

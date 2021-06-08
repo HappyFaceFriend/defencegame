@@ -11,27 +11,31 @@ public class TowerFSMBase : HoldableObject
     public float Battery { get { return battery; } }
 
     [Header("Base References")]
-    protected LevelManager levelManager;
     [SerializeField] protected Transform imagesTransform;
     [SerializeField] protected Transform batteryOut;
+    [SerializeField] protected Transform energyBarPosition;
 
     [Header("Base Stats")]
     [ReadOnly] [SerializeField] float battery = 100;
     [ReadOnly] [SerializeField] protected State currentState;
     [SerializeField] protected bool worksWhileHolding;
 
+    protected LevelManager levelManager;
     protected Animator animator;
     protected bool isNewState;
+    protected StatusBar energyBar;
 
-    public void SetReferences(LevelManager levelManager)
+    public void Init(LevelManager levelManager, StatusBar energyBar)
     {
         this.levelManager = levelManager;
+        this.energyBar = energyBar;
+        energyBar.Init(100, transform, energyBarPosition.localPosition);
     }
     protected void Awake()
     {
-        currentState = State.Ready;
         animator = imagesTransform.GetComponent<Animator>();
         imageCopyTransform = imagesTransform;
+        SetState(State.Ready);
     }
 
     protected void Start()
@@ -64,6 +68,7 @@ public class TowerFSMBase : HoldableObject
     public void SetBattery(float battery)
     {
         this.battery = battery;
+        energyBar.Value = battery;
         if(battery<=0)
         {
             this.battery = 0;

@@ -5,9 +5,6 @@ using UnityEngine;
 public class ObjectiveFlower : MonoBehaviour
 {
     [SerializeField] LevelManager levelManager;
-    [SerializeField] StatusBar hpBar;
-    [SerializeField] float maxHp;
-    [ReadOnly] [SerializeField] float currentHp;
     [ReadOnly] [SerializeField] bool isDead = false;
     [SerializeField] int flowerCount;
     List<MonsterFSMBase> attackedMonsters;
@@ -16,30 +13,29 @@ public class ObjectiveFlower : MonoBehaviour
     void Awake()
     {
         attackedMonsters = new List<MonsterFSMBase>();
-        currentHp = maxHp;
-        hpBar.Init(maxHp, transform, new Vector2(0, 1f));
+        
+        //hpBar.Init(hp, transform, new Vector2(0, 1f));
     }
 
     public void GetDamage(MonsterFSMBase monster, float damage)
     {
-        if (currentHp - damage <= 0)
+        /*if (hp.Value - damage <= 0)
         {
             isDead = true;
-            damage = currentHp;
+            damage = hp.Value;
         }
-        currentHp -= damage;
-        hpBar.Value = currentHp;
-        levelManager.SucceedRate -= (damage / maxHp) * 50;
+        hp.Value -= damage;
+        levelManager.SucceedRate -= (damage / hp.MaxValue) * 100 / flowerCount;*/
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-    MonsterFSMBase monster= collision.gameObject.GetComponent<MonsterFSMBase>();
+        MonsterFSMBase monster= collision.gameObject.GetComponent<MonsterFSMBase>();
         if (monster == null)
             return;
         if (attackedMonsters.Contains(monster))
             return;
         attackedMonsters.Add(monster);
-        GetDamage(monster, maxHp * 0.2f);
+        //GetDamage(monster, hp.MaxValue * 0.2f);
         monster.MultiplyMoveSpeed(2f);
     }
 }

@@ -4,28 +4,27 @@ using UnityEngine;
 
 public class PlayerFSM : MonoBehaviour
 {
+    public enum State
+    {
+        Idle = 0, Walk = 1, HoldingIdle = 2, HoldingWalk = 3, BatteryCharging = 4
+    }
     public Vector2 LastInputVector {  get { return lastInputVector; } }
     public State CurrentState { get { return currentState; } }
     public bool IsHolding { get { return isHolding; } set { isHolding = value; } }
 
-    [ReadOnly][SerializeField] State currentState;
     [Header("References")]
     [SerializeField] Transform imageTransform;
     [SerializeField] PlayerHand hand;
+
+    [Header("Player Stats")]
+    [ReadOnly] [SerializeField] State currentState;
+    [SerializeField] float batteryChargeSpeed;
+
     DirectionMovement movementComponent;
     FlipObjectToPoint spriteFlipComponent;
     Vector2 inputVector;
     Vector2 lastInputVector;
     bool isHolding;
-    [Header("Player Stats")]
-    [SerializeField] float batteryChargeSpeed;
-
-
-    public enum State
-    {
-        Idle = 0, Walk = 1, HoldingIdle = 2, HoldingWalk=3, BatteryCharging=4
-    }
-    
 
     bool isNewState;
     new Rigidbody2D rigidbody;

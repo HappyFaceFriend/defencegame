@@ -19,10 +19,12 @@ public class WaveData
 {
     public int waveNumber;
     public List<SpawnCall> spawnCalls;
+    public float totalTime;
     public WaveData(int waveNumber)
     {
         this.waveNumber = waveNumber;
         spawnCalls = new List<SpawnCall>();
+        totalTime = 0f;
     }
 }
 public class LevelSpawnData
@@ -60,6 +62,7 @@ public class LevelSpawnData
 
                         SpawnCall spawnCall = new SpawnCall(int.Parse(words[0]), int.Parse(words[1]), uint.Parse(words[2]) / 1000.0f);
                         waveDatas[waveDatas.Count-1].spawnCalls.Add(spawnCall);
+                        waveDatas[waveDatas.Count - 1].totalTime += spawnCall.time;
                         state = NextRead.Anything;
                     }
                     catch

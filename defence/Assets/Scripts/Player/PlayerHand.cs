@@ -8,20 +8,23 @@ public class PlayerHand : MonoBehaviour
     public bool IsHoldingObject { get { return heldObject != null; } }
     public GridObject SelectedObject { get { return selectedObject; } }
     public GridBackground SelectedBackground {  get { return selectedBackground; } }
+
     [Header("References")]
     [SerializeField] PlayerFSM player;
     [SerializeField] GridManager gridManager;
     [SerializeField] ItemGuide itemGuide;
+
     [Header("Holding Positions")]
     [SerializeField] Vector3 sidePos;
     [SerializeField] Vector3 upPos;
     [SerializeField] Vector3 downPos;
+
     [Header("Status")]
     [ReadOnly] [SerializeField] HoldableObject heldObject;
     [ReadOnly] [SerializeField] GridObject selectedObject;
     [ReadOnly] [SerializeField] GridBackground selectedBackground;
+    [ReadOnly] [SerializeField] Vector2Int cellInFront;
 
-    Vector2Int cellInFront;
 
     void Awake()
     {
@@ -29,18 +32,31 @@ public class PlayerHand : MonoBehaviour
     }
     bool IsInteractable()
     {
-        return (selectedObject != null && !IsHoldingObject) //can grab the object
-               || (IsHoldingObject && (selectedObject == null) && (selectedBackground == GridBackground.Empty));//can put down object
+        if (selectedBackground == GridBackground.OutOfBound)
+            return false;
+        if (selectedObject != null && !IsHoldingObject) //can grab object
+            return true;
+        if (IsHoldingObject && (selectedObject == null) && (selectedBackground == GridBackground.Empty))//can put down object
+            return true;
+        return false;
     }
     private void Update()
     {
         //detect item at direction
         cellInFront = gridManager.WorldPosToGridIndex(player.transform.position) + Vector2Int.RoundToInt(player.LastInputVector);
         itemGuide.position = gridManager.GridIndexToWorldPos(cellInFront);
-        selectedObject = gridManager.GetObjectAt(cellInFront);
-        selectedBackground = gridManager.GetBackgroundAt(cellInFront);
+        if (gridManager.IsInBound(itemGuide.position))
+        {
+            selectedObject = gridManager.GetObjectAt(cellInFront);
+            selectedBackground = gridManager.GetBackgroundAt(cellInFront);
+        }
+        else
+        {
+            selectedObject = null;
+            selectedBackground = GridBackground.OutOfBound;
+        }
         //TODO : currently ignoring add-ons to tower
-        itemGuide.SetState(selectedObject != null, IsInteractable());
+        itemGuide.SetState(selectedObject != null, IsInteractable(), selectedBackground);
         //change how the player holds item as direction changes (visuals)
         if (player.LastInputVector.y == 1)
             transform.localPosition = upPos;

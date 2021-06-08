@@ -9,22 +9,34 @@ public abstract class MonsterFSMBase : MonoBehaviour
         Idle=0, Walk=1, Attack=2, Dead = 3, EndOfRoad = 4
     }
     public State CurrentState { get { return currentState; } }
-    [ReadOnly][SerializeField] protected State currentState;
-    protected bool isNewState;
-
-    new protected Rigidbody2D rigidbody;
-    protected MovementController movementController;
-    protected RouteMovement movementComponent;
 
     [Header("Base References")]
     [SerializeField] protected Transform imageTransform;
-    public Animator animator;
-    protected SpriteRenderer spriteRenderer;
 
     [Header("Base Stats")]
+    [ReadOnly] [SerializeField] protected State currentState;
     [SerializeField] protected float maxHp;
+    [SerializeField] protected float currentHp;
     [SerializeField] protected float moveSpeed;
-    [ReadOnly] [SerializeField] protected float currentHp;
+    [SerializeField] protected Transform hpBarPosition;
+
+    protected SpriteRenderer spriteRenderer;
+    protected StatusBar hpBar;
+
+    protected bool isNewState;
+    new protected Rigidbody2D rigidbody;
+    protected MovementController movementController;
+    protected RouteMovement movementComponent;
+    protected Animator animator;
+
+
+    public void Init(StatusBar hpBar)
+    {
+        currentHp = maxHp;
+        this.hpBar = hpBar;
+        hpBar.Init(maxHp, transform, hpBarPosition.localPosition);
+        SetState(State.Walk);
+    }
 
     public void SetMoveSpeed(float moveSpeed)
     {
@@ -36,6 +48,16 @@ public abstract class MonsterFSMBase : MonoBehaviour
         this.moveSpeed *= moveSpeedAlpha;
         movementComponent.MoveSpeed *= moveSpeedAlpha;
     }
+    public void TakeDamage(float damage)
+    {
+        currentHp -= damage;
+        hpBar.Value = currentHp;
+        if (currentHp <= 0)
+        {
+            currentHp = 0;
+            SetState(State.Dead);
+        }
+    }
 
     protected void Awake()
     {
@@ -46,15 +68,17 @@ public abstract class MonsterFSMBase : MonoBehaviour
         movementComponent.MoveSpeed = moveSpeed;
         animator = imageTransform.GetComponent<Animator>();
         spriteRenderer = imageTransform.GetComponent<SpriteRenderer>();
-        SetState(State.Walk);
-
-        currentHp = maxHp;
     }
-
     protected void Start()
     {
         StartCoroutine(FSMMain());
     }
+    private void OnDestroy()
+    {
+        if(hpBar != null)
+            Destroy(hpBar.gameObject);
+    }
+
     IEnumerator FSMMain()
     {
         while (true)
@@ -68,14 +92,6 @@ public abstract class MonsterFSMBase : MonoBehaviour
         animator.SetInteger("State", (int)state);
         currentState = state;
         isNewState = true;
-    }
-    public void TakeDamage(float damage)
-    {
-        currentHp -= damage;
-        if(currentHp <= 0)
-        {
-            SetState(State.Dead);
-        }
     }
     IEnumerator Dead()
     {
